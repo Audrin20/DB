@@ -1,0 +1,35 @@
+USE universidade_u;
+
+DELIMITER $$
+CREATE FUNCTION <func_nome>(parâmetros)
+RETURNS <tipo_de_dado_que_sera_retornado>
+BEGIN
+
+	/* bloco de código da função */
+    RETURN <retorno>
+
+END
+$$
+SELECT
+	<func_nome>(parâmetros)
+FROM
+	<func_nome>(parâmetros)
+-------------------- primeira function -------------------
+
+/*
+	ela vai receber uma data no formato yyyy-mm-dd e vai retornar uma string dd-mm-yyyy
+*/
+
+delimiter $$
+CREATE FUNCTION func_data_ptbr(p_data datetime) /* não usa "in" por padrão é tudo entrada "in" */
+RETURNS char(10)
+deterministic /* a função é deterministica quando não afeta dados do bd. Funções que não modificam dados são seguras, as que afetam são não seguras */
+comment 'Function serve para retornar datas no formato dd/mm/yyyy'
+BEGIN
+	RETURN date_format(p_data, '%d/%m/%Y');
+END
+$$
+delimiter ;
+
+select nome, data_nascimento from aluno;
+select nome, func_data_ptbr(data_nascimento) as data_nascimento from aluno; 

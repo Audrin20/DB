@@ -1,0 +1,17 @@
+use universidade_u;
+
+SELECT * FROM aluno;
+
+-- delete
+-- drop table / create table
+-- truncate table 
+
+truncate table gasto;
+
+-- truncando tabela onde está a fk
+select * from telefone;
+truncate table telefone;
+
+-- truncando a tabela referencia
+select * from aluno;
+truncate table curso;

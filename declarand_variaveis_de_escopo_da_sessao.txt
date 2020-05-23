@@ -1,0 +1,10 @@
+use universidade_u;
+
+set @x = 10;
+set @y = 15;
+set @Nome = 'Jorge';
+
+set @y = 25;
+set @resultado = @x + @y;
+
+select @resultado as teste;

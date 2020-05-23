@@ -1,0 +1,34 @@
+use universidade_u;
+
+/* escopo de seção */
+
+/* escopo de parâmetros */
+
+/* escopo de local */
+
+delimiter $$
+create procedure proc_exemplo_parametros(
+	in param1 int,
+    out param2 varchar(50),
+    inout param3 float(3,1)
+)
+begin
+	select param1, param2, param3;
+    set param2 = 'Parâmetro 2 foi modificado';
+    set param3 = 30.3;
+    /*
+    param1 - será exibido pois é um parâmetro de entrada
+    param2 - será exibido null, pois o valor não é passado, é passado apenas a ref.
+    param3 - será exibido 70.5, pois é um parâmetro de entrada, e vai permitir alterar o valor da variável de sessão, pois também é uma referência
+    */
+end
+$$
+delimiter ;
+
+set @p1 = 100;
+set @p2 = 'Parâmetro 2';
+set @p3 = 70.5;
+drop procedure universidade_u.proc_exemplo_parametros;
+call proc_exemplo_parametros(@p1, @p2, @p3);
+select @p1, @p2, round(@p3, 1);
+show procedure status where Db = 'universidade_u';

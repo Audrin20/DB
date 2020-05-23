@@ -1,0 +1,11 @@
+use universidade_u;
+
+/* declarar uma variável que contenha o cpf de um aluno */
+set @cpf = '555.555.555-55';
+select * from aluno;
+/* descobrir o id do aluno */
+select idaluno from aluno where cpf = @cpf;
+set @idaluno = (select idaluno from aluno where cpf = @cpf);
+/* recuperar os registros de telefones dos alunos */
+select @idaluno;
+select * from telefone where fk_idaluno = @idaluno;

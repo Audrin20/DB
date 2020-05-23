@@ -1,0 +1,18 @@
+/* listamos as triggers do bd */
+show triggers where `table` = 'funcionario' ;
+
+/* instrução para recuperar a trigger (bloco lógico) */
+show create trigger universidade_u.tr_before_insert_funcionario;
+
+/*alterar - remover a trigger e criar a trigger novamente */
+delimiter $$
+CREATE TRIGGER `tr_before_insert_funcionario` BEFORE INSERT ON `funcionario` FOR EACH ROW
+begin
+	insert into funcionario_log(fk_idmatricula, tipo_log, funcao_antiga, funcao_nova, telegone_antigo, telefone_novo)
+	values(null, 'BI', null, NEW.funcao, null, NEW.telefone);
+end
+$$
+delimiter ;
+
+/* remover as triggers */
+drop trigger universidade_u.tr_before_insert_funcionario;

@@ -1,0 +1,19 @@
+USE universidade_u;
+
+delimiter $$
+create procedure proc_ifelse()
+comment 'exemplo de uso dos condicionais ifelse'
+begin
+	declare sexo char(1);
+    set sexo = (select sexo from aluno where idaluno = 3);
+    if sexo = 'M' THEN
+		select 'O aluno é do sexo masculino';
+	else
+		select 'A aluna é do sexo feminino';
+    end if;   
+end
+$$
+delimiter ;
+
+drop procedure universidade_u.proc_ifelse;
+call proc_ifelse();

@@ -1,0 +1,35 @@
+use universidade_u;
+
+/* listar procedures do bd */
+show procedure status where Db = 'universidade_u'; /* o banco que está usando */
+
+/* mostrar o conteúdo da procedure */
+show create procedure universidade_u.proc_oi; /* bancodedados.nomeprocedure; */
+ 
+ /* alterar procedure -> remover a procedure e criar novamente */
+ /* alteração */
+drop procedure universidade_u.proc_oi;
+ /*xyz, &, && qualquer delimitador que você quiser*/
+delimiter $$
+create procedure proc_oi ()
+begin
+
+ 	select 'Oi, eu fui modificada!' as msg;
+
+end
+$$
+delimiter ;
+
+call proc_oi();
+
+
+/* --------------- */
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_oi`()
+begin
+
+ 	select 'Oi, eu fui modificada!' as msg;
+
+end$$
+DELIMITER ;

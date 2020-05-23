@@ -1,0 +1,27 @@
+use universidade_u;
+
+/* tipagem forte / fraca */
+
+set @nome = 'Jorge';
+set @nome = 10;
+select @nome;
+/* tipagem fraca */ 
+
+delimiter $$
+create procedure proc_variaveis_escopo_local1()
+begin
+	declare 
+		x int default 10;  /* declarando variável de escopo local */
+        declare papagaio float(8,2);
+        /* lógica procedure */
+        set papagaio = 20.45;
+        set x = 'jorge'; /* erro, comente. */
+        /* tipagem forte */ 
+        select papagaio as variavel_escopo_local;
+end
+$$
+delimiter ;
+drop procedure universidade_u.proc_variaveis_escopo_local1;
+show procedure status where Db = 'universidade_u';
+call proc_variaveis_escopo_local1();
+call proc_variaveis_escopo_local1();

@@ -1,0 +1,22 @@
+use universidade_u;
+
+select * from aluno;
+desc aluno;
+show create table aluno;
+
+alter table aluno modify column `idaluno` int NOT NULL AUTO_INCREMENT first;
+CREATE TABLE `aluno` (
+   `sexo` char(1) DEFAULT NULL,
+   `ativo_sn` int DEFAULT '1',
+   `nome` varchar(25) DEFAULT NULL,
+   `cpf` varchar(14) DEFAULT NULL,
+   `email` varchar(150) DEFAULT NULL,
+   `idaluno` int NOT NULL AUTO_INCREMENT, -- copiei este que é o ddlcoluna
+   `data_nascimento` date DEFAULT NULL,
+   PRIMARY KEY (`idaluno`),
+   UNIQUE KEY `uc_alun_cpf` (`cpf`),
+   UNIQUE KEY `uc_aluno_email` (`email`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+; 
+ -- after coluna 
+alter table aluno modify column  `ativo_sn` int DEFAULT '1' after data_nascimento;

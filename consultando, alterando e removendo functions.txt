@@ -1,0 +1,23 @@
+USE universidade_u;
+
+/* listando as functions do banco de dados */
+show function status where Db = 'universidade_u';
+
+/* mostrar o conteúdo de uma function */
+show create function universidade_u.func_data_ptbr;
+
+delimiter $$
+CREATE FUNCTION `func_data_ptbr`(p_data datetime) 
+RETURNS char(14) /* se ligar nisso, antes eram 10 pq eram só dd/mm/yyyy */
+     DETERMINISTIC
+     COMMENT 'Function serve para retornar datas no formato dd/mm/yyyy'
+ BEGIN
+ 	RETURN date_format(p_data, '--%d/%m/%Y--');
+ END;
+ $$
+ delimiter ;
+ /* alterar function -> remover a function e criar novamente */
+ /* remover function */
+ drop function universidade_u.func_data_ptbr;
+ 
+ select func_data_ptbr('2017-03-27 00:00:00') as data_formatada;

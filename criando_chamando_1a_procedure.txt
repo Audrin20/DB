@@ -1,0 +1,13 @@
+use universidade_u;
+/* 1ª procedure */
+
+delimiter $$
+create procedure proc_oi()
+begin
+	select 'Oi, você acabou de realizar um procedimento que está armazenado no bd! Sempre que precisar, você pode me executar.' as msg;
+end
+$$
+delimiter ;
+CALL proc_oi();
+
+/* processos bem definidos que são executaods repetidas vezes */

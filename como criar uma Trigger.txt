@@ -1,0 +1,11 @@
+use universidade_u;
+
+create trigger <tgr_name>
+before/after insert/delete/update on <tabela>
+for each row /* para cada linha */
+begin
+
+	/* bloco de código da trigger */
+    
+end
+ 

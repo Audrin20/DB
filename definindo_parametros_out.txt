@@ -1,0 +1,20 @@
+use universidade_u;
+/*
+	o total de alunos e o total de professores
+*/
+delimiter $$
+create procedure proc_resumo(out total_professores int, out total_alunos int)
+comment ' Resumo do total de alunos e professores'
+begin
+
+	/* total de professores */
+    select count(*) into total_professores from professor; /* inputando o valor na variável @total_professores */
+    
+    /* total de alunos */
+    select count(*) into total_alunos from aluno; /* inputando o valor na variável @total_alunos */
+end
+$$
+delimiter ;
+
+call proc_resumo(@x, @y); /* */
+select @x as total_professores, @y as total_alunos;

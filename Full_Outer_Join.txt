@@ -1,0 +1,12 @@
+use universidade_u;
+
+
+select
+	*
+from
+	disciplina as d left join professor as p ON ( d.fk_idprofessor = p.idprofessor)
+union /* faz a uniao entre os registros das consultas */
+select
+	*
+from
+	disciplina as d right join professor as p ON ( d.fk_idprofessor = p.idprofessor);

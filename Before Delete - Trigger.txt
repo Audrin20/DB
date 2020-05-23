@@ -1,0 +1,21 @@
+
+show triggers;
+show create trigger universidade_u.tr_before_insert_funcionario;
+delimiter $$
+CREATE TRIGGER `tr_before_delete_funcionario` 
+BEFORE DELETE ON `funcionario` 
+FOR EACH ROW
+begin
+  	insert into funcionario_log(fk_idmatricula, tipo_log, funcao_antiga, funcao_nova, telefone_antigo, telefone_novo)
+  	values(OLD.idmatricula, 'BD', OLD.funcao, null, OLD.telefone, null);
+end
+$$
+delimiter ;
+
+insert into funcionario(nome, funcao, telefone)values('Elton', 'Auxiliar Contábil','11 3333-4444');
+select * from funcionario_log;
+select * from funcionario;
+
+set foreign_key_checks = 0;
+delete from funcionario where idmatricula = 1;
+set foreign_key_checks = 1;

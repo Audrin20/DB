@@ -1,0 +1,17 @@
+USE universidade_u;
+select * from telefone;
+select 
+    a.idaluno,
+    a.nome,
+    case
+	when a.sexo = 'M' then 'Masculino'
+        when a.sexo = 'F' then 'Feminino'
+	end as sexo,
+    t.numero,
+    case
+	when t.tipo = 'res' then 'residencial'
+        when t.tipo = 'cel' then 'celular'
+        when t.tipo = 'com' then 'comercial'
+	end as tipo
+from 
+	aluno as a left join telefone as t on(a.idaluno = t.fk_idaluno);
