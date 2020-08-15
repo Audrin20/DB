@@ -1,0 +1,10 @@
+funcionamento do servidor/ambiente --> Variáveis de status
+
+Variáveis de status
+    uptime --> Quantos segundos desde que o serviço MySQL foi iniciado
+    bytes_received --> Bytes recebidos de todos os clientes pelo servidor
+    bytes_sent -- Bytes enviados
+
+show global status --> Lista variaveis de status globais
+show global status where variable_name in('uptime','bytes_received','bytes_sent')
+show local status where variable_name in('uptime','bytes_received','bytes_sent')

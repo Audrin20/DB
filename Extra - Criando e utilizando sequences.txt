@@ -1,0 +1,23 @@
+/* Extra - Criando e utilizando Sequences */
+
+create sequence produto.sequence_x_1 increment 100 start 10000;
+
+create table produto.tb_teste_1(
+	id_teste_1 int default nextval('produto.sequence_x_1') primary key,
+	teste varchar(100)
+);
+
+insert into produto.tb_teste_1(teste)values('teste 500');
+select * from produto.tb_teste_1;
+select * from produto.tb_teste_2;
+
+
+create table produto.tb_teste_2(
+	id_teste_2 int default nextval('produto.sequence_x_1') primary key,
+	teste varchar(100)
+);
+
+insert into produto.tb_teste_2(teste)values('teste2')
+
+drop table produto.tb_teste_2;
+drop sequence produto.sequence_x_1;

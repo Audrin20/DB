@@ -1,0 +1,58 @@
+/* Tablespaces -> permitem definir o local de armazenatmento físico dos arquivos que represetam os objetos dos bancos de dados */
+/* tablespaces padrões: pg_global pg_default */
+
+select * from pg_catalog.pg_settings where name = 'data_directory';
+
+/* listando tablespaces */
+select * from pg_catalog.pg_tablespace;
+
+/* listar a relação de bds e suas respectivas tablesapaces */
+select 
+	d.datname,
+	t.spcname
+from 
+	pg_catalog.pg_database as d
+	left join pg_catalog.pg_tablespace as t on d.dattablespace = t.oid;
+	
+/* listar as tabelas e os seus namespaces*/
+select schemaname, tablename, tablespace from pg_catalog.pg_tables where tablename = 'tb_nome_tabela';
+
+/* criar um novo tablespace */
+create tablespace repositorio1 location 'D:\postgre\repositorio1';
+
+/* criar bancos de dados associados a tablespaces específicos */
+create database bd_1 tablespace repositorio1;
+
+/* criar tabelas associadas a tablespaces específicos */
+create table tb_nome_tabela (
+	id serial primary key,
+	teste varchar(200)
+) tablespace repositorio1;
+
+/* remover tablespaces */
+drop tablespace repositorio1; /* remover os objetos ou movimentar para outros tablespaces */
+
+drop table tb_nome_tabela;
+drop database bd_1;
+
+/* criando novos tablespaces */
+create tablespace repositorio2 location 'D:\postgre\repositorio2';
+create tablespace repositorio3 location 'D:\postgre\repositorio3';
+
+/* criando objetos dentro do tablespace repositorio2 */
+
+/* criar bancos de dados associados a tablespaces específicos */
+create database bd_1 tablespace repositorio2;
+
+/* criar tabelas associadas a tablespaces específicos */
+create table tb_nome_tabela (
+	id serial primary key,
+	teste varchar(200)
+) tablespace repositorio2;
+
+/* movendo os objetos entre os tablespaces */
+alter database bd_1 set tablespace repositorio3;
+alter table tb_nome_tabela set tablespace repositorio3;
+
+/* renomear tablespaces */
+alter tablespace repositorio3 rename to data3;

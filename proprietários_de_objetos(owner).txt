@@ -1,0 +1,47 @@
+/* descobrindo proprietários: banco de dados, schemas, tabelas */
+
+select
+    datname,
+    pg_get_userbyid(datdba) as "owner"
+from
+    pg_catalog.pg_database;
+
+/* datdba -> Dono do banco de dados */
+
+select * from information_schema.schemata;
+select schema_name, schema_owner from information_schema.schemata;
+
+select * from pg_catalog.pg_tables;
+select table_name, table_owner from pg_catalog.pg_tables;
+
+/* atividade listar proprietário de triggers, views, functions */
+
+
+/* --------------------------------- */
+
+select * from pg_roles;
+
+create database bd_teste_1 owner jorge; /* definindo dono do banco em uma sessão diferente */
+
+/* alterando o proprietário */
+
+alter database bd_teste_1 owner to gustavo;
+
+/* criando schema e atribuindo para outro usuário */
+
+create schema schema_teste authorization jorge;
+
+/* alterando o dono do schema */
+
+alter schema schema_teste owner to gustavo;
+
+/* criando tabela e atribuindo para outro usuário */
+
+create table schema_teste.tb_teste_1(
+	id serial primary key,
+	teste_1 varchar(200)
+);
+
+select table_name, table_owner from pg_catalog.pg_tables;
+alter table schema_teste.tb_teste_1 owner to gustavo;
+

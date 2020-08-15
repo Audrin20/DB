@@ -1,0 +1,34 @@
+/* Foreign Key - Garante a integridade referencial (relacionamento) entre registros de tabelas distintas */
+
+
+drop table produto.tb_categoria;
+drop table produto.tb_fabricante;
+drop table produto.tb_produto;
+
+CREATE TABLE produto.tb_categoria(
+	id_categoria serial primary key,
+	categoria varchar(30) not null
+);
+drop table produto.tb_produto;
+
+CREATE TABLE produto.tb_produto(
+	id_produto serial primary key,
+	fk_id_categoria int, /* constraint fk_tb_produto_fk_id_categoria references produto.tb_categoria(id_categoria) */
+	fk_id_fabricante int,
+	produto varchar(50) not null,
+	unidade_medida char(3) not null,
+	preco_compra numeric(10,2) not null,
+	preco_venda numeric(10,2) not null
+	/* Outra forma de referência foreign key */
+	/*constraint /* nome da constraint */fk_tb_produto_fk_id_fabricante foreign key(fk_id_fabricante) references produto.tb_fabricante(id_fabricante) */
+);
+/* Implementando Foreign Keys */
+alter table produto.tb_produto add constraint fk_tb_produto_fk_id_categoria foreign key(fk_id_categoria) references produto.tb_categoria(id_categoria);
+alter table produto.tb_produto add constraint fk_tb_produto_fk_id_fabricante foreign key(fk_id_fabricante) references produto.tb_fabricante(id_fabricante);
+
+CREATE TABLE produto.tb_fabricante(
+	id_fabricante serial primary key,
+	fabricante varchar(100) not null,
+	telefone varchar(17),
+	contato varchar(30)
+);

@@ -1,0 +1,6 @@
+Principais constraints
+Not Null
+Enum Check
+Unique
+Primary Key
+Foreign Key

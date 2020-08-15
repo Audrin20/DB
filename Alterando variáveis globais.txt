@@ -1,0 +1,8 @@
+show variables where variable_name = 'max_connections';
+
+/* dinamicas e podem ser modificadas em tempo de execução */
+set @@global.max_connections = 250;
+set global max_connections = 300;
+
+/* somente leitura */
+set global port = 3307; # Dá erro, pois a variável é somente leitura

@@ -1,0 +1,6 @@
+\list ou \l >> Linha de comando - Prompt
+SELECT datname FROM pg_database;
+
+CREATE DATABASE mercado_y;
+
+DROP DATABASE mercado_y;

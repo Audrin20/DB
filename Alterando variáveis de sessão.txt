@@ -1,0 +1,21 @@
+show variables where variable_name = 'max_connections';
+show global variables;
+show session variables;
+
+/*
+   auto_increment
+*/
+
+show global variables where variable_name like 'auto_increment%';
+show session variables where variable_name like 'auto_increment%';
+
+/* auto_increment_increment - > incremento feito a cada novo registro */
+/* auto_increment_offset -> valor inicial das colunas que recebem a constraint auto_increment */
+
+
+/*
+   ---- 
+*/
+
+set @@session.auto_increment_increment = 10;
+set session auto_increment_offset = 5;

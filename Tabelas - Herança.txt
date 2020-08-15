@@ -1,0 +1,62 @@
+/* Tables parte 4 - Herança */
+
+create schema tabelas_avancadas;
+drop schema tableas_avancadas;
+create table tabelas_avancadas.tb_pessoa(
+	id_pessoa serial primary key,
+	nome varchar(100) not null,
+	idade int,
+	sexo char(1) constraint chk_sexo check(sexo in('M','F')) /* Similar ao enum */
+);
+
+create table tabelas_avancadas.tb_funcionario(
+	id_funcionario serial primary key,
+	matricula varchar(20) not null,
+	departamento varchar(50) not null 
+) /* aplicando a herança, tabela funcionario é filha da tabela tb_pessoa */  inherits (tabelas_avancadas.tb_pessoa);
+
+select * from tabelas_avancadas.tb_pessoa;
+
+select * from tabelas_avancadas.tb_funcionario;
+
+alter table tabelas_avancadas.tb_pessoa add column apelido varchar(15); /* vai para as duas tabelas, não é só uma cópia, é um relacionamento! */
+
+/* create table tabelas_avancadas.tb_cliente(); */
+
+insert into tabelas_avancadas.tb_pessoa(
+	nome, idade, sexo, apelido
+)values(
+	'Maria', 27, 'F', 'Mari'	
+);
+
+insert into tabelas_avancadas.tb_funcionario(
+	nome, idade, sexo, matricula, departamento, apelido
+)values(
+	'João', 35, 'M', 'xyz123','contabilidade','Joãozinho'
+);
+
+insert into tabelas_avancadas.tb_funcionario(
+	nome, idade, sexo, matricula, departamento, apelido
+)values(
+	'Rosaba', 20, 'F', '123abc','Administrativo','Rô'
+);
+
+update tabelas_avancadas.tb_funcionario set idade = 45 where id_funcionario = 1;
+update tabelas_avancadas.tb_pessoa set nome = 'João da Silva' where id_pessoa = 2;
+delete from tabelas_avancadas.tb_funcionario where id_funcionario = 1;
+delete from tabelas_avancadas.tb_pessoa where id_pessoa = 3;
+
+select * from tabelas_avancadas.tb_funcionario;
+select * from tabelas_avancadas.tb_pessoa;
+
+create table tabelas_avancadas.tb_cliente(
+	id_cliente serial primary key,
+	email varchar(100)
+)inherits(tabelas_avancadas.tb_pessoa);
+
+select * from tabelas_avancadas.tb_cliente;
+
+insert into tabelas_avancadas.tb_cliente(nome,idade, sexo, apelido, email)values('audrin',20,'M','aud','audrinh@gmail.com') ;
+
+
+drop table tabelas_avancadas.tb_cliente;

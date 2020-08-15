@@ -1,0 +1,5 @@
+show global variables where variable_name = 'datadir';
+
+set global datadir = 'C:/mysql_dados/Data/'; --> Somente Leitura...
+Interrompa o serviço, Acessa o arquivo my.ini, procura a variável 'Datadir',troca o caminho,
+reinicia o serviço.

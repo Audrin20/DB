@@ -1,0 +1,5 @@
+/* alterando senha de users */
+/* 1º senha antiga = 1234*/
+set password for joao@'localhost' = '4321';
+/* 2º senha antiga = 4321*/
+alter user joao@'localhost' identified by 'abcd';

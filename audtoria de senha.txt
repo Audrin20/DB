@@ -1,0 +1,10 @@
+/* o algoritmo de criptografia md5(unidirecional) não é possível converter de volta para 
+o valor original */
+
+select md5('teste'); /* retorno será semre um hash de 32 caracteres */
+
+select * from pg_shadow; /* mantida por questão de compatibilidade */
+
+select * from pg_authid; /* sucessora da pg_shadow */
+
+select * from pg_roles;

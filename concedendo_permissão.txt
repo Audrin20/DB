@@ -1,0 +1,12 @@
+* concedendo permissão */
+/* grant <privilégios> on <banco.objetos> to <usuário> */
+
+grant select on universidade_u.aluno to joao@'localhost';
+
+grant insert on universidade_u.aluno to joao@'localhost';
+
+grant delete on universidade_u.aluno to joao@'localhost';
+
+show grants for joao@'localhost';
+
+select * from mysql.user;

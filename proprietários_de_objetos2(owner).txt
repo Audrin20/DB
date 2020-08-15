@@ -1,0 +1,18 @@
+Transferindo a propriedade de objetos:
+
+select datname,
+       pg_get_userbyid(datdba) as "owner"
+from
+       pg_catalog.pg_database
+
+select schema_name, schema_owner from information_schema.schemata
+select tablename, tableowner from pg_catalog.pgtables
+
+drop role gustavo; /* tem dependencias então não pode ser dropado sem passar os objetos */
+
+select * from pg_roles;
+
+grant gustavo to mariana; -- replicando os privilégios
+reassgin owned by /*proprietario */ gustavo to /*novo proprietario*/ mariana
+
+drop role gustavo; /* agora sim */

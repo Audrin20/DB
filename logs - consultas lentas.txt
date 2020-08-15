@@ -1,0 +1,10 @@
+/* Logs de consultas lentas */
+/* Registra as querys que demoram excessivamente para serem executadas */
+/* logs de consultas lentas */
+
+show global variables where variable_name = 'slow_query_log_file'; /* DESKTOP-HL3V117.log */
+show global variables where variable_name = 'datadir';
+show global variables where variable_name = 'slow_query_log'; /* variavel global dinamica slow_query_log */
+show global variables where variable_name = 'long_query_time'; /* variavel global dinamica slow_query_log */
+set global long_query_time = 4;
+select sleep(5), 'Query muito lenta!!!' from universidade_u.aluno;

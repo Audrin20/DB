@@ -1,0 +1,10 @@
+/* Tabelas UNLOGGED Não podem ser restauradas em desastres*/
+/* Armazenamento de dados de sessão */
+
+create unlogged table tabelas_avancadas.utb_carrinho_compras(
+	id_carrinho_compra serial primary key,
+	fk_id_usuario int,
+	dados_json text
+);
+
+select * from tabelas_avancadas.utb_carrinho_compras;

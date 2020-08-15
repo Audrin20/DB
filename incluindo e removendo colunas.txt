@@ -1,0 +1,6 @@
+/* alter table schema.<nome_tabela> add column <nova_coluna> <tipo_de_dados> */
+/* alter table schema.<nome_tabela> drop column <nome_coluna> */
+
+alter table produto.tb_fabricante add column endereco varchar(200);
+
+alter table produto.tb_fabricante drop column endereco;

@@ -1,0 +1,10 @@
+/* listando os processos ativos */
+select * from pg_catalog.pg_stat_activity;
+
+/* cancelar a execução de uma query */
+select pg_cancel_backend(/*numero PID*/10888);
+select pg_cancel_backend(pid) from pg_catalog.pg_stat_activity where username = 'site';
+select pid from pg_catalog.pg_stat_activity where usename = 'postgres';
+
+/* finalizar a sessão */
+select pg_terminate_backend(6248);

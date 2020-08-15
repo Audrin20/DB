@@ -1,0 +1,20 @@
+-- criação role
+
+create role jorge login password 'abcd1234' nocreatedb nocreaterole/* default */; /* criar um perfil característica de login */
+create role maria login password '1234' valid until '2020-07-17 10:11:18'; /* perfis com data de validade */
+create role joao login password 'abcd' valid until '2022-12-31' createdb createrole; /* com permissão para criar banco e users*/
+create role gustavo login password '1234' superuser;
+
+-- remover role
+
+drop role maria;
+
+-- atualizar role
+
+alter role maria rename to mariana; /* modificar o nome */
+alter role joao with password 'asdf' /* modificar senha */
+alter role gustavo valid until '2020-11-01 13:52';
+alter role mariana valid until 'infinity';
+alter role joao nocreatedb nocreaterole;
+alter role gustavo nosuperuser;
+alter role jorge superuser;

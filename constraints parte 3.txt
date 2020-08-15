@@ -1,0 +1,32 @@
+/* Unique - Garante que o valor de uma coluna ou de um conjunto de coluas será único entre todos os registros da tabela. */
+
+drop table produto.tb_fabricante;
+
+create table produto.tb_fabricante (
+	id_fabricante int,
+	fabricante varchar(100) not null,
+	telefone varchar(17),
+	contato varchar(30),
+	email varchar(120) constraint uc_tb_fabricante_email unique
+);
+
+create table produto.tb_fabricante (
+	id_fabricante int,
+	fabricante varchar(100) not null,
+	telefone varchar(17),
+	contato varchar(30),
+	email varchar(120),
+	constraint uc_tb_fabricante_email unique(email)
+);
+
+
+--
+alter table produto.tb_fabricantes add column email varchar(120) unique;
+--
+insert into produto.tb_fabricante(
+	id_fabricante,
+	fabricante,
+	telefone,
+	contato,
+	email)values(1, 'Teste2', '211 5555-25555', 'Maria', 'maria@teste.com.br');
+

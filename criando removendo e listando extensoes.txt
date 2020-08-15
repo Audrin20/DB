@@ -1,0 +1,16 @@
+/* listando as extensões disponíveis no pacote contrib */
+select * from pg_catalog.pg_available_extensions;
+
+/* instalar as extensões */
+create extension pgcrypto;
+create extension btree_gin schema produto;
+
+/* visualização detalhada */
+select * from pg_catalog.pg_extension;
+select * from pg_catalog.pg_namespace where oid = 11;
+select * from pg_catalog.pg_namespace where oid = 2200;
+select * from pg_catalog.pg_namespace where oid = 24797;
+
+/* removendo as extensões */
+drop extension pgcrypto;
+drop extension btree_gin;

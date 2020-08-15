@@ -1,0 +1,28 @@
+/* revogando privilégio DML e DQL para uma tabela específica dentro de um schema específico */
+
+revoke select, insert, update, delete on produto.tb_fabricante from marcos;
+
+/* revogando privilégio DML e DQL para todas  as tabelas dentro de um schema específico */
+
+revoke select, insert, update, delete on all tables in schema produto from marcos;
+
+/* revogando todos os privilégios dentro de um schema */
+
+revoke all privileges on schema produto from marcos;
+
+/* revogando privilégio de uso de um schema específico */
+
+revoke usage on schema produto from marcos;
+
+/* revogar todos os privilégios de uma role */
+
+revoke all privileges on database mercado_y from marcos;
+revoke all privileges on database postgres from marcos;
+revoke all privileges on database bd_joao from marcos;
+
+/* revogando privilégio de conexão a um banco de dados específico */
+
+revoke connect on database mercado_y from marcos;
+revoke connect on database postgres from marcos;
+revoke connect on database bd_joao from marcos;
+

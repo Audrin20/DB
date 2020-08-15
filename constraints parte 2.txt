@@ -1,0 +1,34 @@
+/* Check - permite aplicar uma ou várias condições a uma coluna de uma tabela
+para permitir ou impedir a persistência da informação passada para a mesma 
+em uma operação de insert ou update */
+
+drop table produto.tb_produto;
+
+create table produto.tb_produto (
+	id_produto int,
+	fk_id_categoria int,
+	fk_id_fabricante int,
+	produto varchar(50) not null,
+	unidade_medida char(3) not null
+	/* preco_compra numeric(10,2) not null
+	constraint chk_tb_produto_preco_compra check(preco_compra >= 0), /* se verdadeiro o preco será add */
+	preco_venda numeric(10,2) not null 
+	constraint chk_tb_produto_preco_venda /* nome da constraint */ 
+	check(preco_venda >= 0),
+	
+	constraint chk_tb_produto_preco_venda_2 
+	check(preco_venda > preco_compra) */
+);
+
+alter table produto.tb_produto add column preco_compra numeric(10,2) not null
+constraint chk_tb_produto_preco_compra check(preco_compra >=0);
+
+alter table produto.tb_produto add column preco_venda numeric(10,2) not null constraint chk_tb_produto_preco_venda
+check(preco_venda >= preco_compra)
+
+insert into produto.tb_produto(
+	id_produto, fk_id_categoria, fk_id_fabricante, produto, unidade_medida,
+	preco_compra, preco_venda)values(1,1,1,'XYZ','UN',5,10);
+
+select * from produto.tb_produto;
+update produto.tb_produto set preco_compra = 2 where id_produto = 1;

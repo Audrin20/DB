@@ -1,0 +1,19 @@
+create materialized view produto.vwm_produto as 
+select
+	prod.produto,
+	cat.categoria,
+	fab.fabricante
+from
+	produto.tb_produto as prod
+	left join produto.tb_categoria as cat on(prod.fk_id_categoria = cat.id_categoria)
+	left join produto.tb_fabricante as fab on(prod.fk_id_fabricante = fab.id_fabricante)
+with no data /* realize a consulta mas não retorne dados */
+
+select * from produto.vwm_produto;
+refresh materialized view produto.vwm_produto; /* todo dia de madrugada */
+
+/* renomear view */
+alter materialized view produto.vwm rename to vwm_produto;
+
+/* remover */
+drop materialized view produto.vwm_produto;

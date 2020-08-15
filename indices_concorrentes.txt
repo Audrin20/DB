@@ -1,0 +1,3 @@
+/* Criação do indice sem bloquear o acesso à tabela */
+create index concurrently idx_cliente_nome_sobrenome 
+on cliente.tb_cliente using btree(nome, sobrenome);

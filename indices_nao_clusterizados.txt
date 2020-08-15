@@ -1,0 +1,9 @@
+/* criando índices não clusterizados */
+select * from cliente.tb_cliente where email = 'Sed.molestie@tellusloremeu.com';
+/* 0.678 */
+/* 0.066 (scan no índice) 
+   0.083 */
+/* create index <nome_indice> on <nome_tabela> using <método_indice> B-tree, R-tree, Hash(<coluna>) */
+create index idx_cliente_nome on cliente.tb_cliente using btree /*é o padrão, se não colocar nenhum método ele assume o b-tree */(nome);
+create index idx_cliente_email on cliente.tb_cliente using btree /*é o padrão, se não colocar nenhum método ele assume o b-tree */(email);
+drop index cliente.idx_cliente_email;

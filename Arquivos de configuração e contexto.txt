@@ -1,0 +1,26 @@
+Arquivos de configuração
+
+	*config_file -> Arquivo de configurações gerais de ambiente
+	*hba_file -> Arquivo de configurações de permissão de acesso e autenticação
+	/* Para localizar os arquivos de configuração faça: */
+		select * from pg_settings where name in ('config_file','hba_file'); /* localiza os arquivos */
+		select distinct(context) from pg_settings; /* contexto internal: Não podem ser modificadas, só no processo de compilação do post
+											       	  
+													  postmaster: Alterado na config_file ou alter system, necessário reiniciar o server
+													  
+													  signup: alteradas durante a execução da instância do bd, "reload" para aplicar as alterações
+													  
+													  superuser: sessão, set, alter rule, alter database >> Só para superusers
+													  
+													  user: sessão, set, alter rule, alter database
+													  
+													  superuser-backend: análoga ao superuser quando definidas variáveis não podem ser mais modificadas a qualquer momento
+													  é até o fim da sessão.
+													  
+													  backend: análogas ao user, qualquer usuário faz alterações aqui. As variáveis aqui não podem mais ser modificadas
+													  durante a conexão da sessão.
+												   
+												   */
+		/* postgresql.conf guarda as configurações gerais de ambiente */
+		/* hba_file.conf configurações de acesso */
+		select pg_show_all_settings(); /* Função do pg_settings (que é uma view) */

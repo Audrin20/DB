@@ -1,0 +1,18 @@
+/* BD padrão - perfomance_schema  
+- tabelas que armazenam informações de execução do servidor MySQL em baixo nível, tais como:
+- Logs de eventos do servidor em tempo de execução
+- Desempenho do servidor(performance)
+- Conexões ativas de hosts e usuários
+*/
+ show databases;
+ 
+ use performance_schema;
+ show tables;
+ 
+ /* inspecionar as variáveis de sistemas e variáveis de status */
+ select * from global_variables; /* variaveis de sistemas */
+ select * from global_status;
+ 
+ /* analisar os clientes conectados ao servidor bd */
+ select * from hosts; /* origem da conexão */
+ select * from users; /* usuários */ 

@@ -1,0 +1,13 @@
+use universidade_u;
+
+/* listando as views */
+show tables; /* sempre usar o prefixo de view, pois elas aparecem junto às tabelas */
+
+/* consultar o conteúdo de uma view (declaração) */
+show create view universidade_u.vw_rel_cursos_disciplinas_professores;
+
+/* alterar uma view */
+
+alter view vw_rel_cursos_disciplinas_professores as [...];
+
+/* drop view vw_rel_cursos_disciplinas_professores */

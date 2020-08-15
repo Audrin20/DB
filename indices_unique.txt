@@ -1,0 +1,13 @@
+/*
+
+	indices clusterizados
+		unique index
+	
+	indices não clusterizados
+		unique index
+
+*/
+/* restrição */
+/* não pode haver repetições */
+create unique index idx_cliente_email on cliente.tb_cliente
+using btree(email);

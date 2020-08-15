@@ -1,0 +1,18 @@
+/* listar bancos de dados */
+select datname from pg_database;
+
+/* listar schema/namespaces */
+select schema_name from information_schema.schemata where catalog_name = 'mercado_y';
+
+/* listar tabelas */
+select * from information_schema.tables;
+
+select * from information_schema.tables where table_catalog = 'mercado_y' and table_schema = 'public';
+
+/* criar tabela (ddl) */
+create table tb_categoria(
+	id_categoria int,
+	categoria varchar(30)	
+);
+
+/* schema public é o padrão, se criar uma tabela sem definir o schema, ele vai pra lá */

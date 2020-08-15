@@ -1,0 +1,27 @@
+/*
+
+Functions (Stored Procedures) - Funções SQL e PLPGSQL
+Create Function <schema><nome_funcao>(<parâmetros>) returns <Tipo_de_dado> /* ou usar VOID - não retorna valor */ as $$ /*Delimitador*/
+declare
+	/* opcional, só se tiver variáveis para declarar*/
+	/* Declaração de Variáveis */
+
+begin
+	
+	/* lógica */
+
+end;
+$$ Language <tipo_de_linguagem> /* Tipo SQL quando a function é apenas instrução SQL */ ou /* PLPGSQL quando a function possui estruturas de programação */
+
+*/
+
+/* function, sem retorno (void), linguagem sql */
+
+create function produto.func_teste_void_sql() returns void as $$
+
+insert into produto.tb_categoria (categoria)values('Mercearia');
+
+$$ language sql; /* só usa instrução SQL, não usa if, else, begin, end...*/
+
+select * from produto.tb_categoria;
+select produto.func_teste_void_sql();

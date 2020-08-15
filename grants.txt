@@ -1,0 +1,66 @@
+select * from pg_catalog.pg_roles; /* mostra todas as roles do banco */
+select * from pg_catalog.pg_roles where rolcanlogin = true; /* usuários que podem fazer login */
+select * from pg_catalog.pg_user;
+
+select * from information_schema.table_privileges;
+select distinct(grantor) from information_schema.table_privileges;
+select distinct(grantee) from information_schema.table_privileges;
+select * from information_schema.table_privileges where grantee = 'PUBLIC';
+
+/* o acesso aos bancos de dados foram revogados */
+revoke all on database postgres from PUBLIC;
+revoke all on database mercado_y from PUBLIC;
+revoke all on database bd_joao from PUBLIC;
+
+/* schemas */
+revoke all on schema public from PUBLIC;
+
+/* Privilégios
+Select
+Insert
+Update
+Delete
+Truncate
+References
+Trigger
+Create
+Connect
+Execute
+All
+*/
+
+/* Objetos
+Table 
+Column
+View
+Sequence
+Function
+Schema
+Database
+*/
+
+create role marcos login password 'a1b2';
+
+/* concendendo privilégio de conexão ao banco de dados específico */
+/* grant <privilégio> on <objeto> to <role> with grant option */
+grant connect on database mercado_y to marcos;
+
+/* concedendo provilégio de uso de um schema específico */
+grant usage on schema produto to marcos;
+
+/* concedendo provilégio de uso de um schema específico */
+grant usage on schema produto to marcos;
+
+/* concedendo privilégios de execução de instruções DML a uma tabela específica */
+grant insert, update, delete on produto.tb_fabricante to marcos;
+
+/* concedendo privilégios de execução de instruções DQL a uma tabela específica */
+grant select on produto.tb_fabricante to marcos;
+
+/* concedendo privilégios DML e DQL para todas as tabelas dentro de um schema específico */
+grant insert, update, delete, select on all tables in schema produto to marcos;
+grant all privileges on all tables in schema produto to marcos;
+
+/* conceder permissões(privilégios) */
+ 
+ grant all privileges on all tables in schema produto to marcos with grant option;

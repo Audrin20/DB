@@ -1,0 +1,6 @@
+/* indices parciais são indices não clusterizados */
+
+create index idx_cliente_idade on cliente.tb_cliente 
+using btree(idade) where idade between 15 and 40; /* where indica o conjunto de registros que devem ser usados */
+
+select * from cliente.tb_cliente where idade between 20 and 39;

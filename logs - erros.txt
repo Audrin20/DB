@@ -1,0 +1,13 @@
+/* Logs de erros */
+/* mensagens de erros, avisos e notas relativas ao funcionamento do servidor */
+
+show global variables where variable_name = 'log_error'; /* .\DESKTOP-HL3V117.err */ /* Logs de erros */
+/* global read only | Não consegue mudar em execução é necessário reiniciar primeiro */
+show global variables where variable_name = 'datadir'; /* Caminho dos dados */
+/* global read only | Não consegue mudar em execução é necessário reiniciar primeiro */
+show global variables where variable_name = 'log_error_verbosity'; 
+/* global dinamica */
+/* 1 -> registro apenas os logs de erros 
+   2 -> registrar logs de erros e os logs de avisos (alertas)
+   3 -> registrar logs de erros, avisos e notas (informações)
+*/

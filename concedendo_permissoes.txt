@@ -1,0 +1,55 @@
+/* grupo */
+create role aplicacao; /* novo perfil no sgbd */
+create role dba createdb createrole;
+create role desenvolvimento createdb;
+create role terceiros valid until '2020-12-31';
+
+/* usuários */
+create role site login password '123456';
+create role app login password '123456';
+
+/* dba */
+create role felipe login password '123456';
+
+/* desenvolvimento */
+
+create role pedro login password '123456';
+create role bianca login password '123456';
+create role fatima login password '123456';
+
+/* terceiros */
+create role consultoriaX login password '123456';
+create role ConsultoriaY login password '123456';
+
+/* privilégio de conexão ao banco de dados */
+grant connect on database mercado_y to aplicacao;
+grant connect on database mercado_y to dba;
+grant connect on database mercado_y to desenvolvimento;
+grant connect on database mercado_y to terceiros;
+
+/* privilegio de usos de schemas */
+grant usage on schema produto to terceiros;
+grant usage on schema estoque to terceiros;
+grant usage on schema venda to terceiros;
+grant usage on schema auditoria to terceiros;
+grant usage on schema cliente to terceiros;
+
+/* privilégios de uso das instruções DQL e DML para tabelas */
+grant select, update, insert, delete on produto.tb_fabricante to aplicacao;
+grant select, insert on auditoria.tb_produto_log to aplicacao;
+grant all privileges on all tables in schema produto to dba;
+grant all privileges on all tables in schema produto to desenvolvimento;
+grant select on all tables in schema produto to terceiros;
+
+/* inclusão de role (login) em role (grupo) */
+grant aplicacao to site;
+grant aplicacao to app;
+
+grant dba to felipe;
+
+grant desenvolvimento to pedro;
+grant desenvolvimento to bianca;
+grant desenvolvimento to fatima;
+
+grant terceiros to consultoriaX;
+grant terceiros to consultoriaY;

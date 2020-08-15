@@ -1,0 +1,11 @@
+/* Primary Key Compostas - Garante uma identificação única para cada registro dentro de uma tabela com base em duas ou mais colunas */
+
+create table produto.tb_exemplo(
+	coluna_id_1 int,
+	coluna_id_2 int,
+	coluna_3 varchar(100),
+	coluna_4 numeric (8,2),
+	constraint /*<nome>*/ pk_tb_exemplo primary key (coluna_id_1, coluna_id_2)
+);
+
+drop table produto.tb_exemplo;

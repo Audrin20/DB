@@ -1,0 +1,11 @@
+select schema_name from information_schema.schemata;
+select nspname from pg_catalog.pg_namespace; -- Listar schemas
+
+create schema produto; -- Cria esquemas
+alter schema produto rename to produto_abcd; -- altera nome do esquema
+drop schema produto_abcd; -- derruba o esquema
+
+create schema produto; -- Cria esquemas
+create schema estoque; -- Cria esquemas
+create schema auditoria; -- Cria esquemas
+create schema venda; -- Cria esquemas

@@ -1,0 +1,27 @@
+/* BD padrão - mysql
+	Tabelas que armazenam informações de funcionamento do MySQL, tais como:
+	Permissões de usuários
+    Status dos objetos como: tabelas, funções, procedures, plugins, etc
+    Logs do sistema (general logs e slow logs)
+    Ajuda do sistema
+    Fusos Horários
+*/
+show databases;
+
+use mysql;
+show tables;
+
+/* permissões de usuários */
+select * from user;
+
+/* status das tabelas do bd*/
+
+select * from innodb_table_stats; /* nmostra os updates realizados */
+select count(*) from universidade_u.aluno; /* quantidade de registros */
+
+/* logs */
+select * from slow_log;
+select * from general_log;
+
+/* ajuda */
+select * from help_topic where name like 'JOIN';

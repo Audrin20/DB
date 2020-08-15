@@ -1,0 +1,4 @@
+/* adicionando indice cluster */
+alter table cliente.tb_cliente add column id_cliente serial primary key;
+
+select * from cliente.tb_cliente;

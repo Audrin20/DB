@@ -1,0 +1,37 @@
+/* Data atual */
+select curdate();
+
+/* Data e Hora atuais */
+select now();
+
+/* Formatando datas */
+SELECT DATE_FORMAT(curdate(),'%d-%M-%Y');
+/*
+%d - dia do mês (de 01 até 31)
+%D - dia do mês com sufixo em inglês
+%m - mês (de 01 a 12)
+%M - nome do mês em inglês
+%y - ano (dois dígitos)
+%Y - ano (quatro dígitos)
+ */
+ 
+ /* extrair parte de data */
+ SELECT EXTRACT(MONTH FROM '1989-06-01');
+ SELECT EXTRACT(YEAR FROM curdate());
+ SELECT EXTRACT(DAY FROM curdate());
+ 
+ /* adicionando intervalos de tempo às datas */
+ SELECT now() as data_hora_atuais, DATE_ADD(now(), INTERVAL -2 HOUR) AS data_formatada_com_hora;
+ /* second, minute, hour, day, month, year */
+ 
+ /* CALCULO ENTRE DIAS */
+ SELECT '1990-12-05' as data_nascimento,
+ curdate() as data_atual,
+ datediff(curdate(), '1990-12-05') as diferenca_dias,
+ floor(datediff(curdate(), '1990-12-05') / 365) as idade_aproximada
+ ;
+ /* calculo de meses entre datas */
+ select period_diff('199504', '199402') as diferenca_meses;
+ 
+ /* dia do ano */
+ SELECT DAYOFYEAR(CURDATE());

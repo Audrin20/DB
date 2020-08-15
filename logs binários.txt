@@ -1,0 +1,25 @@
+/* Logs de Binários */
+/* Registra todas as querys que afetam registros, desde querys de inserts, updates e deletes até as querys de criação de objetos como procedures 
+functions views e triggers
+
+1 - backup
+2 - querys q afetaram registros no banco de dados
+3 - querys q afetaram registros no banco de dados
+4 - querys q afetaram registros no banco de dados
+5 - querys q afetaram registros no banco de dados
+6 - bd restaurado com base no bkp do dia 1 (Trazendo o bd no exato estado do bkp do dia 1), mas e os registros entre esses dias? Logs bináriosb 
+
+*/
+
+/* 1 - Onde esses logs são armazenados? */
+
+show global variables where variable_name='log_bin_basename'; /* WINDOWS-PC-bin.<número sequencial>.log */
+/* global read only */
+show global variables where variable_name='log_bin'; /* ON / OFF */
+/* global dinamica */
+
+/* banco de dados é iniciado */
+/* bytes */
+show global variables where variable_name='max_binlog_size'; /* bytes */
+show global variables where variable_name='binlog_expire_logs_seconds'; /* segundos */
+select (((2592000/60) / 60)/ 24)

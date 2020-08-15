@@ -1,0 +1,4 @@
+/* revogando permissão */
+
+revoke drop, insert on universidade_u.aluno from joao@'localhost';
+show grants for joao@'localhost';

@@ -1,0 +1,13 @@
+/* Armazena objetos (views) que permitem analisar resumidamente e de modo mais fácil
+as informações persistidas no banco de dados performance_schema */
+
+show databases;
+ 
+use sys; /* Administração do servidor */
+show tables;
+ 
+ select * from information_schema.tables where table_schema = 'sys';
+ 
+select * from host_summary_by_statement_latency;
+select * from memory_global_total;
+

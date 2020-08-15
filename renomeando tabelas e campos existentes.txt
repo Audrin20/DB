@@ -1,0 +1,10 @@
+/* alter table <nome_tabela> rename to <novo_nome_tabela> */
+/* alter table <nome_tabela> rename column <nome_coluna> to <novo_nome_coluna> */
+
+alter table produto.tb_produto_novo rename to tb_produto;
+
+select * from information_schema.columns where table_name = 'tb_produto'
+and table_catalog = 'mercado_y'
+and table_schema = 'produto';
+
+alter table produto.tb_produto rename column um to unidade_medida;

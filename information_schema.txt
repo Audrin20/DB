@@ -1,0 +1,13 @@
+/* lisar as tabelas do information_schema */
+select * from information_schema.tables 
+where table_schema = 'information_schema'
+and(table_name like '%role%');
+
+select * from information_schema.column_privileges where grantee = 'marcos';
+
+column_privileges
+table_privileges
+role_table_grants
+role_column_grants
+
+/* prefixo role - não exibem os privilégios herdados do beneficiário public */

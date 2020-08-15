@@ -1,0 +1,20 @@
+truncate /* apenas zera os registros */ table auditoria.tb_produto_log;
+alter sequence auditoria.tb_produto_log_id_produto_log_seq restart with 1; /* zera as colunas  auto_increment */
+truncate /* apenas zera os registros */ table estoque.tb_movimentacao;
+alter sequence estoque.tb_movimentacao_id_movimentacao_seq restart with 1; /* zera as colunas  auto_increment */
+truncate /* apenas zera os registros */ table venda.tb_venda;
+alter sequence venda.tb_venda_id_venda_seq restart with 1;
+truncate table estoque.tb_estoque_produto cascade; /* há dependencias entre essa e algumas tabelas então é necessário o "cascade" */
+alter sequence estoque.tb_estoque_produto_id_estoque_produto_seq restart with 1;
+truncate table produto.tb_produto cascade;
+alter sequence produto.tb_produto_id_produto_seq restart with 1;
+truncate table produto.tb_categoria cascade;
+alter sequence produto.tb_categoria_id_categoria_seq restart with 1;
+truncate table produto.tb_fabricante cascade;
+alter sequence produto.tb_fabricante_id_fabricante_seq restart with 1;
+
+/* drop elimina a tabela */ 
+/*
+mysql -> truncate remove os registros e "resetar" as colunas auto_increments
+postgre -> truncate remove os registros, mas não reseta as colunas serials
+*/

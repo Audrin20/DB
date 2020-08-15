@@ -1,0 +1,6 @@
+/* usuários e privilégios controle de permissão */
+select * from mysql.user;
+select * from mysql.db;
+select * from mysql.tables_priv;
+select * from mysql.columns_priv;
+select * from mysql.procs_priv;

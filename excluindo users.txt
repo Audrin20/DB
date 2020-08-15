@@ -1,0 +1,4 @@
+/* excluindo users */
+select * from mysql.user;
+/* drop user usuario@<host>; */
+drop user joao@'111.111.111.111';

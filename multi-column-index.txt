@@ -1,0 +1,10 @@
+select * from cliente.tb_cliente where id_cliente = 500;
+select * from cliente.tb_cliente where nome = 'Dalton';
+select * from cliente.tb_cliente where email = '???';
+select * from cliente.tb_cliente 
+where email = 'Dalton' and email = '???' and idade > 50;
+
+create unique index idx_cliente_nome_email_idade on cliente.tb_cliente
+using btree(nome, email, idade); /* indice multiplas colunas */
+
+drop index cliente.idx_cliente_nome_email_idade;
