@@ -1,0 +1,34 @@
+localizar o diretorio do Postgre
+
+/data/pg_hba.conf
+
+Incluir novas linhas
+
+em 
+
+# IPv4 local connections:
+host     all     postgres(user)     127.0.0.1/32       trust
+
+# IPv6 local connections:
+host     all     postgres(user)        ::1/128          trust
+
+acessar o executável psl(linha de comando) 
+
+
+CMD > cd (diretorio do POSTGRE)
+
+psql -h localhost -p 5433 -U postgres -d postgres
+-p = porta
+-U = user
+-d = banco de dados
+>> Feita essa conexão é possível acessar e alterar a senha
+
+alter role postgres(user) with password '1234' (nova senha);
+
+Voltar ao pg_hba.conf e Remover estas linhas:
+
+# IPv4 local connections:
+host     all     postgres(user)     127.0.0.1/32       trust
+
+# IPv6 local connections:
+host     all     postgres(user)        ::1/128          trust

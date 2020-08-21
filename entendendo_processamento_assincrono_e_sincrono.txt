@@ -1,0 +1,22 @@
+-- cláusula go (processamento síncrono)
+-- MSSQL (processamento assíncrono) 
+-- Lote, quando várias instruções SQL são enviadas.
+
+
+--- disparando um lote de instruções sql (t-sql) que será processado de modo assíncrono pelo sgbd --
+
+create database bd_teste_1;
+go -- para que seja executado com prioridade e não pode terminar com ponto e vírgula
+use bd_teste_1;
+go
+create table tb_teste_1(
+	nome varchar(200)
+);
+go
+insert into tb_teste_1(nome)values('João');
+insert into tb_teste_1(nome)values('Maria');
+go 4 -- quero que aconteça x vezes
+
+select * from tb_teste_1;
+
+-- processada a instrução use 1º ela entra em conflito com a create... esse é o problema do processamento assíncrono, uma instrução depende da outra e no modo assíncrono elas não são resolvidas em ordem.

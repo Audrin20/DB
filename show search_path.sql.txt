@@ -1,0 +1,11 @@
+show search_path;
+
+-- para a sessão
+set search_path to x, y, xyz; /* essa variável define quem é o schema padrão para a sessão */ /* se o primeiro não existir ele passa para o próximo */
+
+-- para o usuario
+alter role postgres set search_path to x, y, xyz; /* definindo schema padrão por user */
+
+create schema xyz;
+create table abcd(teste varchar(100)); 
+create table bbcd(teste varchar(100)); 

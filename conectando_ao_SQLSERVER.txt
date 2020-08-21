@@ -1,0 +1,3 @@
+Conexão pelo prompt
+
+sqlcmd -S localhost\SQLEXPRESS -U sa -P sa1234

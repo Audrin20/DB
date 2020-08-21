@@ -1,0 +1,5 @@
+create database bd_teste_2;
+create database bd_teste_3 template template0;
+create database bd_teste_4 template mercado_y;
+
+/* NUNCA Modificar o template 0 */
