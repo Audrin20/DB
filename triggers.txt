@@ -1,0 +1,196 @@
+-- SQL SERVER Trigger
+/*
+
+CREATE TRIGGER 
+ON
+FOR/AFTER/INSTEAD OF DML/DDL
+AS
+BEGIN
+	/* Bloco de código */
+END
+
+Tabelas temporárias >> Deleted e inserted
+
+*/
+
+use erpx;
+
+select * from tb_cliente;
+go
+
+create trigger tgr_teste_cliente_aiu on tb_cliente -- after insert e update
+after insert, update as
+begin
+	/* bloco de código */
+	print 'Olá, a lógica do gatilho foi disparada após a inserção/atualização do registro';
+end;
+go
+
+insert into tb_cliente(razao_social, nome_fantasia)values('Franquia 5', 'Miguel Bolos');
+
+select * from tb_cliente;
+
+update tb_cliente set nome_fantasia = 'Miguel Bolos LTDA' where id_cliente = 5;
+delete tb_cliente where id_cliente = 5;
+
+create trigger tgr_teste_cliente_iofd on tb_cliente -- after insert e update
+instead of delete as
+begin
+	/* bloco de código */
+	print 'Olá, a lógica do gatilho foi disparada no lugar do delete do registro';
+end;
+go
+
+insert into tb_cliente(razao_social, nome_fantasia)values('Franquia 5', 'Miguel Bolos');
+delete tb_cliente where id_cliente = 5;
+
+select * from tb_cliente;
+
+use erpx;
+
+select * from tb_cliente;
+
+create trigger tgr_teste_cliente_ai on tb_cliente
+after insert as
+begin
+	declare @campo1 varchar(50); /* declarando uma variavel */
+	declare @campo2 varchar(50); /* declarando uma variavel */
+	declare @msg varchar(200); /* declarando uma variavel */
+
+	select @campo1 = (select razao_social from inserted)
+	select @campo2 = (select nome_fantasia from inserted)
+
+	select @msg = concat('Cliente ', @campo1, ' de nome fantasia ', @campo2, ' foi cadastrado no sistema!')
+	
+	insert into tb_teste_triggers(historico)values(@msg)
+
+end;
+go
+
+select * from tb_teste_triggers;
+
+insert into tb_cliente(razao_social, nome_fantasia)
+values('Franquia 6', 'Chocolândia');
+
+
+create table tb_teste_triggers(
+	historico varchar(200)
+);
+
+
+create trigger tgr_teste_cliente_au on tb_cliente
+after update as
+begin
+	declare @campo1 varchar(50); /* declarando uma variavel */
+	declare @campo2 varchar(50); /* declarando uma variavel */
+	declare @msg varchar(200); /* declarando uma variavel */
+
+	select @campo1 = (select razao_social from inserted)
+	select @campo2 = (select nome_fantasia from inserted)
+
+	select @msg = concat('Cliente ', @campo1, ' de nome fantasia ', @campo2, ' foi atualizado no sistema!')
+	
+	insert into tb_teste_triggers(historico)values(@msg)
+
+end;
+go
+
+update tb_cliente set razao_social = 'Franquia 7',nome_fantasia = 'Chocolândia show' where id_cliente = 7;
+
+select * from tb_cliente;
+
+
+drop trigger tgr_teste_cliente_au
+create trigger tgr_teste_cliente_au on tb_cliente
+after update as
+begin
+	declare @campo1_novo varchar(50); /* declarando uma variavel */
+	declare @campo2_novo varchar(50); /* declarando uma variavel */
+
+	declare @campo1_antigo varchar(50); /* declarando uma variavel */
+	declare @campo2_antigo varchar(50); /* declarando uma variavel */
+
+	declare @msg varchar(200); /* declarando uma variavel */
+
+	select @campo1_novo = (select razao_social from inserted)
+	select @campo2_novo = (select nome_fantasia from inserted)
+
+	select @campo1_antigo = (select razao_social from deleted)
+	select @campo2_antigo = (select nome_fantasia from deleted)
+
+	select @msg = concat('Cliente ', @campo1_antigo, ' de nome fantasia ', @campo2_antigo, ' foi atualizado para ', @campo1_novo,' de nome fantasia ',@campo2_novo)
+	
+	insert into tb_teste_triggers(historico)values(@msg)
+
+end;
+go
+
+
+/*
+dados antigos: Franquia 7 | Chocolandia Show (deleted)
+dados novos: Franquia 9 | Show de sabores (inserted)
+*/
+
+update tb_cliente set razao_social = 'Franquia 9',nome_fantasia = 'Show de sabores' where id_cliente = 7;
+
+select * from tb_cliente;
+select * from tb_teste_triggers;
+
+create trigger tgr_teste_cliente_ad on tb_cliente
+after delete as
+begin
+	
+	declare @campo1_antigo varchar(50); /* declarando uma variavel */
+	declare @campo2_antigo varchar(50); /* declarando uma variavel */
+
+	declare @msg varchar(200); /* declarando uma variavel */
+
+	select @campo1_antigo = (select razao_social from deleted)
+	select @campo2_antigo = (select nome_fantasia from deleted)
+
+	select @msg = concat('Cliente ', @campo1_antigo, ' de nome fantasia ', @campo2_antigo, ' foi removido!')
+	
+	insert into tb_teste_triggers(historico)values(@msg)
+
+end;
+go
+
+select * from tb_teste_triggers;
+select * from tb_cliente;
+delete from tb_cliente where id_cliente = 7
+
+
+create trigger trg_controlador_instancia_bd
+on all server
+for create_database
+as
+begin 
+	print'Um novo banco de dados foi criado!';
+end;
+go
+
+
+create trigger trg_controlador_erpx
+on database
+for create_table
+as
+begin 
+	print'Uma nova tabela foi criada!';
+end;
+go
+
+create database bd_teste_2;
+create table tb_teste_trigger_2(
+	id int
+);
+
+/*
+Instruções DDL
+
+1- os gatilhos ddl não podem ser usados como gatilhos instead of
+2- os gatilhos ddl não criam as tableas temporárias inserted e deleted
+
+*/
+
+drop database bd_teste_2;
+drop table tb_teste_trigger_2;

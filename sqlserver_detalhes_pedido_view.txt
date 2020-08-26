@@ -1,0 +1,23 @@
+select * from erpx.dbo.tb_cliente; -- sempre apontar o nome completo do banco.schema.tabela
+select * from erpx.dbo.tb_item;
+select * from erpx.dbo.tb_pedido;
+select * from erpx.dbo.tb_pedido_item;
+
+/* visão Pedidos Detalhes */
+use erpx;
+-- drop view dbo.vw_pedido_detalhes;
+-- alter view dbo.vw_pedido_detalhes as 
+alter view dbo.vw_pedido_detalhes as
+select
+	p.id_pedido,
+	c.razao_social,
+	c.nome_fantasia,
+	i.descricao as descricao_item,
+	pit.quantidade as quantidade_solicitada	
+from
+	erpx.dbo.tb_pedido as p
+	left join erpx.dbo.tb_cliente as c on (p.fk_id_cliente = c.id_cliente)
+	left join erpx.dbo.tb_pedido_item as pit on (p.id_pedido = pit.fk_id_pedido)
+	left join erpx.dbo.tb_item as i on (pit.fk_id_item = i.id_item)
+
+select * from erpx.dbo.vw_pedido_detalhes where id_pedido = 1;

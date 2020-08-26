@@ -1,0 +1,29 @@
+/* entendendo a diferença entre set e select */
+begin 
+	
+
+	declare @teste_set varchar(100);
+	declare @teste_select varchar(100);
+
+	set @teste_set = 'Foi iniciada(SET)';
+	set @teste_select = 'Foi iniciada(SELECT)';
+
+	set @teste_set = (select razao_social from tb_cliente where id_cliente = 100);
+	select @teste_select = razao_social from tb_cliente where id_cliente = 100;
+
+	print @teste_set;
+	print @teste_select;
+end
+
+
+	/*
+		set é a instrução padrão para atribuição de valores a variaveis
+		set não suporta múltipolos atriibuições
+
+		select suporta múltiplas atribuições, porém ficando com a última delas
+		select suporta apenas a atribuição de um único valor
+		que quando as variáveis possuirem valores ja definidos elas se comportarão da seguinte forma:
+		 - no set o valor da variável será sobreposto por null caso a query não retorne valor
+		 - no select o valor da variável será preservado caso a query não retorne valor 
+
+	*/

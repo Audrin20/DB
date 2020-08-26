@@ -1,0 +1,28 @@
+use erpx;
+drop trigger tgr_gera_ordem_producao
+create trigger tgr_gera_ordem_producao
+on tb_pedido
+after update
+as
+begin
+	declare @status_pedido varchar(15);
+	declare @data_limite_fabricacao datetime;
+
+	select @status_pedido = (select status_pedido from inserted);
+	
+	if @status_pedido = 'producao' -- inserir um registro em tb_ordem_producao
+		begin
+			set @data_limite_fabricacao = (select dateadd(day, 7, data_solicitacao) from deleted);
+			insert into tb_ordem_producao(
+				fk_id_pedido, data_limite_fabricacao, status_ordem_producao
+			)values(
+				1, @data_limite_fabricacao, 'aberto'
+			);
+		end;
+end;
+go
+
+update tb_pedido set status_pedido = 'cancelado' where id_pedido = 1;
+select * from tb_pedido;
+select * from tb_ordem_producao;
+sp_help tb_ordem_producao;

@@ -1,0 +1,32 @@
+/* listar, habilitar e desabilitar triggers */
+
+-- listar as triggers
+
+-- associadas a instância do servidor
+select * from sys.server_triggers;
+
+-- associadas a bancos de dados e tabelas específicas
+use erpx;
+select * from sys.triggers;
+select
+	t.*,
+	o.*
+from
+	sys.triggers as t
+	left join sys.objects as o on(t.parent_id = o.object_id);
+
+select * from sys.objects where object_id = 885578193;
+
+-- desabilitando triggers
+disable trigger dbo.tgr_teste_cliente_aiu on dbo.tb_cliente;
+disable trigger dbo.tgr_teste_cliente_ai on dbo.tb_cliente;
+disable trigger dbo.tgr_teste_cliente_au on dbo.tb_cliente;
+disable trigger trg_controlador_instancia_bd on all server;
+disable trigger trg_controlador_erpx on database;
+
+
+-- habilitando triggers 
+enable trigger dbo.tgr_teste_cliente_aiu on dbo.tb_cliente;
+enable trigger dbo.tgr_teste_cliente_aiu on dbo.tb_cliente;
+enable trigger dbo.tgr_teste_cliente_au on dbo.tb_cliente;
+enable trigger dbo.trg_controlador_instancia_bd on all server;

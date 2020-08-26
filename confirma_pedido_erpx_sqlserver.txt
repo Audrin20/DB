@@ -1,0 +1,42 @@
+use erpx;
+
+sp_columns tb_pedido;
+
+alter table tb_pedido add status_pedido varchar(15) default 'aberto';
+
+select * from tb_pedido where id_pedido = 3;
+update tb_pedido set status_pedido = 'cancelado' where id_pedido = 3;
+--update tb_pedido set status_pedido = 'aberto';
+
+/*
+alter table tb_pedido add constraint chk_status_pedido check
+(
+	status_pedido='aberto' 
+	or status_pedido='cancelado'
+	or status_pedido='producao' 
+	or status_pedido='finalizado'
+);
+*/
+
+
+create table tb_ordem_producao(
+	id_ordem_producao int primary key identity,
+	fk_id_pedido int not null,
+	data_limite_fabricacao datetime not null,
+	status_ordem_producao varchar(15) default 'aberto'
+);
+
+alter table tb_ordem_producao add constraint fk_tb_ordem_producao_pedido
+foreign key(fk_id_pedido) references tb_pedido(id_pedido);
+
+alter table tb_ordem_producao add constraint chk_status_ordem_producao check
+(
+	status_ordem_producao='aberto'
+	or status_ordem_producao='andamento'
+	or status_ordem_producao='cancelado'
+	or status_ordem_producao='finalizado'
+);
+
+select * from tb_ordem_producao;
+sp_help tb_ordem_producao;
+

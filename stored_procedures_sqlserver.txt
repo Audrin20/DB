@@ -1,0 +1,25 @@
+/* Stored Procedures do catálogo
+		conjunto de procedimentos de dicionário de dados
+		sp_columns -> descreve os detalhes da coluna de uma tabela
+		sp_pkeys -> detalhes de chave primária, simples ou composta.
+		existem outros...
+*/
+
+use erpx;
+
+sp_columns tb_pedido;
+sp_pkeys tb_pedido;
+
+sp_columns tb_item;
+sp_pkeys tb_item;
+sp_fkeys tb_item;
+sp_fkeys tb_pedido_item;
+
+/* Stored Procedures do mecanismo de banco de dados
+	Conjunto de procedimentos usados para manutenção geral de  uma instância
+	do SQL Server
+	sp_help -> descrição dos objetos funciona como um dicionário de dados
+*/
+
+sp_help tb_cliente;
+sp_help tb_pedido_item;

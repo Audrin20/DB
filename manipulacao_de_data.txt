@@ -1,0 +1,62 @@
+select getdate(); /* retorna a data atual e hora */
+
+-- extrair parte dessa data 
+
+select
+	getdate()as 'data_atual',
+	datename(year, getdate()) as 'ano',
+	datename(month, getdate()) as 'mes',
+	datename(day, getdate()) as 'dia',
+	datename(dayofyear, getdate()) as 'dia_do_ano',
+	datename(weekday, getdate()) as 'dia_da_semana';
+
+select 
+	datename(month, data_solicitacao) as 'mes',
+	datename(year, data_solicitacao) as 'ano',
+	*
+from erpx.dbo.tb_pedido;
+
+
+select
+	data_solicitacao,
+	dateadd(day, -150, data_solicitacao) as 'dia_atualizado',
+	dateadd(month, 12, data_solicitacao) as 'mes_atualizado',
+	dateadd(year, 3, data_solicitacao) as 'ano_atualizado'
+from
+	erpx.dbo.tb_pedido;
+
+
+select
+	data_solicitacao,
+	dateadd(day,7, data_solicitacao) as 'data_limite_fabricacao',
+	dateadd(day, 30, data_solicitacao) as 'data_limite_fabricacao'
+from
+	erpx.dbo.tb_pedido;
+
+-- DATEDIFF
+
+select
+	'1989-06-01' as 'data_inicial',
+	getdate() as 'data_final',
+	datediff(year,'1989-06-01', '1995-05-12') as 'diff_anos',
+	datediff(month,'1989-06-01', getdate()) as 'diff_meses',
+	datediff(day,'1989-06-01', getdate()) as 'diff_dias'
+
+select
+	id_pedido, data_solicitacao, getdate() as 'data_atual',
+	datediff(day, data_solicitacao, getdate()) as 'diff_days'
+from
+	erpx.dbo.tb_pedido
+where
+	DATEDIFF(day, data_solicitacao, getdate()) >= 5;
+
+
+select 
+	data_solicitacao,
+	convert(varchar(10),data_solicitacao,103) as 'Data_Std_Br', -- 103 é o padrão de extração da data, vale pesquisar outros padrões e testar diversos
+	convert(varchar(8),data_solicitacao,108) as 'ext_hora_hh:mm:ss', -- 108 é o padrão de extração da hora:minutos:segundos, vale pesquisar outros padrões e testar diversos
+	(
+		convert(varchar(10),data_solicitacao,103) + ' ' + convert(varchar(8),data_solicitacao,108)
+	) as 'data_hora'
+from
+	erpx.dbo.tb_pedido;
